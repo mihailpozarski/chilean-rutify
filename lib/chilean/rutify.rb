@@ -5,11 +5,14 @@ require_relative "rutify/rut_validator"
 require_relative "rutify/errors"
 
 module Chilean
+  # Chilean rut utils module
   module Rutify
+    # checks if the passed value is valid as a rut character
     def valid_rut_value?(rv)
       ['0','1','2','3','4','5','6','7','8','9','k','K'].include?(rv)
     end
 
+    # returns the rut verifier value
     def get_verifier(rut)
       sum = 0
       mul = 2
@@ -31,6 +34,7 @@ module Chilean
       end
     end
 
+    # checks if the passed rut has a proper verifier value
     def valid_rut_verifier?(raw_rut)
       rut = normalize_rut(raw_rut)
       return false if rut.empty? || rut.size < 2 || !rut.is_a?(String)
@@ -39,6 +43,7 @@ module Chilean
       get_verifier(r) == rut[-1]
     end
 
+    # returns the rut value without any sepecial caracter and upcased
     def normalize_rut(rut)
       return if rut.nil? || !rut.is_a?(String)
 
@@ -47,6 +52,7 @@ module Chilean
       rut.upcase
     end
 
+    # returns the rut value with the chilean format
     def format_rut(raw_rut)
       rut = normalize_rut(raw_rut)
       return if rut.nil? || rut.empty? || rut.size < 2
@@ -64,6 +70,7 @@ module Chilean
       rut.upcase
     end
 
+    # checks if the passed rut is valid
     def valid_rut?(raw_rut)
       rut = normalize_rut(raw_rut)
       return false if rut.nil? || rut.empty? || rut.size < 2
