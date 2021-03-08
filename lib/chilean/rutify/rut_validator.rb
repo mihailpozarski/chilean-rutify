@@ -5,7 +5,7 @@ class RutValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if value.nil? || !value.is_a?(String)
       record.errors.add attribute, (options[:message] || "is a empty rut")
-    elsif !ChileanRutify.valid_rut?(value)
+    elsif !Chilean::Rutify.valid_rut?(value)
       record.errors.add attribute, (options[:message] || "is not a valid rut")
     end
   end
