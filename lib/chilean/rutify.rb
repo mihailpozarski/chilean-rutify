@@ -17,7 +17,7 @@ module Chilean
       sum = 0
       mul = 2
 
-      rut.to_s.reverse.split('').each do |i|
+      rut.to_s.reverse.split("").each do |i|
         sum += i.to_i * mul
         mul = mul == 7 ? 2 : mul + 1
       end
@@ -39,7 +39,7 @@ module Chilean
       rut = normalize_rut(raw_rut)
       return false if rut.empty? || rut.size < 2 || !rut.is_a?(String)
 
-      r = rut[0..(rut.size - 1)]
+      r = rut[0..(rut.size - 2)]
       get_verifier(r) == rut[-1]
     end
 
@@ -58,12 +58,12 @@ module Chilean
       return if rut.nil? || rut.empty? || rut.size < 2
 
       verifier = rut[-1]
-      temp_rut = rut[0..rut.size - 1]
+      temp_rut = rut[0..-2]
       init_rut = ""
 
       while temp_rut.length > 3
         init_rut = "." + temp_rut[(temp_rut.size - 3)..temp_rut.size] + init_rut
-        temp_rut = temp_rut[0..-3]
+        temp_rut = temp_rut[0..-4]
       end
 
       rut = temp_rut + init_rut + "-" + verifier
