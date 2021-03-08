@@ -15,7 +15,7 @@ module Chilean
       mul = 2
 
       rut.to_s.reverse.split('').each do |i|
-        sum += c.to_i * mul
+        sum += i.to_i * mul
         mul = mul == 7 ? 2 : mul + 1
       end
 
