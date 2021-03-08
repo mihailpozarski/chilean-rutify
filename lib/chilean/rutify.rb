@@ -74,5 +74,7 @@ module Chilean
 
       valid_rut_verifier?(rut)
     end
+
+    module_function :normalize_rut, :format_rut, :valid_rut_value?, :get_verifier, :valid_rut?, :valid_rut_verifier?
   end
 end
