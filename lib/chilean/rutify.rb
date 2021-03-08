@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'rutify/version'
-require_relative 'rutify/rut_validator'
-require_relative 'rutify/errors'
+require_relative "rutify/version"
+require_relative "rutify/rut_validator"
+require_relative "rutify/errors"
 
 module Chilean
   module Rutify
@@ -23,24 +23,24 @@ module Chilean
 
       case res
       when 1
-        return 'K'
+        "K"
       when 0
-        return '0'
+        "0"
       else
-        return (11 - res).to_s
+        (11 - res).to_s
       end
     end
 
     def valid_rut_verifier?(raw_rut)
       rut = normalize_rut(raw_rut)
-      return false if rut.empty? || rut.size < 2 || !rut.is_a? String
+      return false if rut.empty? || rut.size < 2 || !rut.is_a?(String)
 
       r = rut[0..(rut.size - 1)]
       get_verifier(r) == rut[-1]
     end
 
     def normalize_rut(rut)
-      return if rut.nil? || !rut.is_a? String
+      return if rut.nil? || !rut.is_a?(String)
 
       rut.delete! "."
       rut.delete! "-"
@@ -53,14 +53,14 @@ module Chilean
 
       verifier = rut[-1]
       temp_rut = rut[0..rut.size - 1]
-      init_rut = ''
+      init_rut = ""
 
-      while temp_rut.length > 3 do
-        init_rut = '.' + temp_rut[(temp_rut.size - 3)..temp_rut.size] + init_rut
+      while temp_rut.length > 3
+        init_rut = "." + temp_rut[(temp_rut.size - 3)..temp_rut.size] + init_rut
         temp_rut = temp_rut[0..-3]
       end
 
-      rut = temp_rut + init_rut + '-' + verifier
+      rut = temp_rut + init_rut + "-" + verifier
       rut.upcase
     end
 
@@ -68,8 +68,8 @@ module Chilean
       rut = normalize_rut(raw_rut)
       return false if rut.nil? || rut.empty? || rut.size < 2
 
-      rut.split('').each do
-        |i| return false unless valid_rut_value?(i)
+      rut.split("").each do |i|
+        return false unless valid_rut_value?(i)
       end
 
       valid_rut_verifier?(rut)
