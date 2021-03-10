@@ -47,8 +47,8 @@ module Chilean
     def normalize_rut(rut)
       return if rut.nil? || !rut.is_a?(String)
 
-      rut.delete! "."
-      rut.delete! "-"
+      rut = rut.delete "."
+      rut = rut.delete "-"
       rut.upcase
     end
 
