@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "active_model"
 require "chilean/rutify"
 
 RSpec.configure do |config|
