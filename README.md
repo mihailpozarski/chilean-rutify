@@ -1,6 +1,6 @@
 # Chilean::Rutify
 
-Chilean Rutify makes rut validations and manipulation easy
+Chilean Rutify makes rut validations and manipulation on Rails easy
 
 ## Installation
 
