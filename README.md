@@ -1,6 +1,6 @@
 # Chilean::Rutify
 
-Chilean Rutify is a Rails gem that makes rut validations and manipulation easy
+Chilean Rutify is a Ruby on Rails gem that makes rut validations and manipulation easy
 
 ## Installation
 
