@@ -6,13 +6,23 @@ RSpec.describe Chilean::Rutify do
   end
 
   describe "valid_rut_value?" do
-    it { expect(described_class.valid_rut_value?(1)).to eq false }
     it { expect(described_class.valid_rut_value?("y")).to eq false }
     it { expect(described_class.valid_rut_value?("/")).to eq false }
-    it { expect(described_class.valid_rut_value?("0")).to eq true }
+    it { expect(described_class.valid_rut_value?([])).to eq false }
+    it { expect(described_class.valid_rut_value?(0)).to eq true }
     it { expect(described_class.valid_rut_value?("9")).to eq true }
     it { expect(described_class.valid_rut_value?("k")).to eq true }
     it { expect(described_class.valid_rut_value?("K")).to eq true }
+  end
+
+  describe "valid_rut_values?" do
+    it { expect(described_class.valid_rut_values?("ya12")).to eq false }
+    it { expect(described_class.valid_rut_values?("/s21")).to eq false }
+    it { expect(described_class.valid_rut_values?(["1234"])).to eq false }
+    it { expect(described_class.valid_rut_values?(1230)).to eq true }
+    it { expect(described_class.valid_rut_values?("4.678-9")).to eq true }
+    it { expect(described_class.valid_rut_values?("234k")).to eq true }
+    it { expect(described_class.valid_rut_values?("K")).to eq true }
   end
 
   describe "get_verifier" do
@@ -48,5 +58,12 @@ RSpec.describe Chilean::Rutify do
     it { expect(described_class.valid_rut?("18.486.758-3")).to eq true }
     it { expect(described_class.valid_rut?("14.001.723-8")).to eq false }
     it { expect(described_class.valid_rut?("14.175.644-4")).to eq false }
+  end
+
+  describe "stringify_rut" do
+    it { expect(described_class.stringify_rut("12.148.514-1")).to eq "12.148.514-1" }
+    it { expect(described_class.stringify_rut(121485141)).to eq "121485141" }
+    it { expect(described_class.stringify_rut([])).to eq nil }
+    it { expect(described_class.stringify_rut(["1234"])).to eq nil }
   end
 end
