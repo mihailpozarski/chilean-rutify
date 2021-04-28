@@ -3,13 +3,14 @@
 require_relative "rutify/version"
 require_relative "rutify/rut_validator"
 require_relative "rutify/errors"
+require_relative "rutify/rutifiable"
 
 module Chilean
   # Chilean rut utils module
   module Rutify
     # checks if the passed value is valid as a rut character
     def valid_rut_value?(rv)
-      ['0','1','2','3','4','5','6','7','8','9','k','K'].include?(rv)
+      ['0','1','2','3','4','5','6','7','8','9','k','K','.','-'].include?(rv)
     end
 
     # returns the rut verifier value
@@ -45,7 +46,7 @@ module Chilean
 
     # returns the rut value without any sepecial caracter and upcased
     def normalize_rut(rut)
-      return if rut.nil? || !rut.is_a?(String)
+      return if rut.nil? || !rut.is_a?(String) || !valid_rut_values?(rut)
 
       rut = rut.delete "."
       rut = rut.delete "-"
@@ -74,14 +75,18 @@ module Chilean
     def valid_rut?(raw_rut)
       rut = normalize_rut(raw_rut)
       return false if rut.nil? || rut.empty? || rut.size < 2
-
-      rut.split("").each do |i|
-        return false unless valid_rut_value?(i)
-      end
+      return false unless valid_rut_values?(rut)
 
       valid_rut_verifier?(rut)
     end
 
-    module_function :normalize_rut, :format_rut, :valid_rut_value?, :get_verifier, :valid_rut?, :valid_rut_verifier?
+    def valid_rut_values?(raw_rut)
+      raw_rut.split("").each do |i|
+        return false unless valid_rut_value?(i)
+      end
+    end
+
+    module_function :normalize_rut, :format_rut, :valid_rut_value?, :get_verifier, :valid_rut?, :valid_rut_verifier?,
+                    :valid_rut_values?
   end
 end

@@ -38,11 +38,36 @@ You can use the available utility methods directly form the module:
     # => "8"
 ```
 
+### Validator
+
 You can also use the available validator as any other custom Rails validator:
 
 ```ruby
 class Person < ActiveRecord::Base
     validates :rut, presence: true, rut: true
+end
+```
+
+### Concern
+Or include the new Rutifiable concern (it asumes you created a `rut` column):
+
+```ruby
+class Person < ActiveRecord::Base
+    includes Chilean::Rutifiable
+    self.rut_format = :classic #(optional) options: [:classic, :normalized, :nil] (nil = no override, default: :classic)
+end
+```
+
+the last one is equivalent to:
+
+```ruby
+class Person < ActiveRecord::Base
+    validates :rut, presence: true, uniqueness: { case_sensitive: false }, rut: true
+
+    def rut=(value)
+        value = Chilean::Rutify.format_rut(value)
+        super(value)
+    end
 end
 ```
 
