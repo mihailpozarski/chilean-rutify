@@ -33,6 +33,8 @@ You can use the available utility methods directly form the module:
     # => true
     Chilean::Rutify.valid_rut_verifier?(rut)
     # => true
+    Chilean::Rutify.valid_rut_values?(rut)
+    # => true
     rut = "36408368"
     Chilean::Rutify.get_verifier(rut)
     # => "8"
