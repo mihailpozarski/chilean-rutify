@@ -19,7 +19,7 @@ RSpec.describe Chilean::Rutify do
     it { expect(described_class.valid_rut_values?("ya12")).to eq false }
     it { expect(described_class.valid_rut_values?("/s21")).to eq false }
     it { expect(described_class.valid_rut_values?(["1234"])).to eq false }
-    it { expect(described_class.valid_rut_values?(1230)).to eq true }
+    it { expect(described_class.valid_rut_values?(1_230)).to eq true }
     it { expect(described_class.valid_rut_values?("4.678-9")).to eq true }
     it { expect(described_class.valid_rut_values?("234k")).to eq true }
     it { expect(described_class.valid_rut_values?("K")).to eq true }
@@ -62,7 +62,7 @@ RSpec.describe Chilean::Rutify do
 
   describe "stringify_rut" do
     it { expect(described_class.stringify_rut("12.148.514-1")).to eq "12.148.514-1" }
-    it { expect(described_class.stringify_rut(121485141)).to eq "121485141" }
+    it { expect(described_class.stringify_rut(121_485_141)).to eq "121485141" }
     it { expect(described_class.stringify_rut([])).to eq nil }
     it { expect(described_class.stringify_rut(["1234"])).to eq nil }
   end
