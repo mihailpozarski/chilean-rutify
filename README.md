@@ -1,6 +1,7 @@
 # Chilean::Rutify
 
 [![reviewdog](https://github.com/mihailpozarski/chilean-rutify/workflows/reviewdog/badge.svg?branch=main&event=push)](https://github.com/mihailpozarski/chilean-rutify/actions?query=workflow%3Areviewdog+event%3Apush+branch%3Amain)
+[![rspec](https://github.com/mihailpozarski/chilean-rutify/workflows/rspec/badge.svg?branch=main&event=push)](https://github.com/mihailpozarski/chilean-rutify/actions?query=workflow%3Arspec+event%3Apush+branch%3Amain)
 
 Chilean Rutify is a Ruby on Rails gem that makes rut validations and manipulation easy
 
