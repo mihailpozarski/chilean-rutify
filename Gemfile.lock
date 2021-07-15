@@ -26,6 +26,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
+    rack (2.2.3)
     rainbow (3.0.0)
     rake (13.0.3)
     regexp_parser (2.1.1)
@@ -54,6 +55,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.8.0)
       parser (>= 3.0.1.1)
+    rubocop-rails (2.11.3)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -70,6 +75,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.0)
+  rubocop-rails (~> 2.11.3)
 
 BUNDLED WITH
    2.2.15
