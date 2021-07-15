@@ -1,6 +1,6 @@
-##
-# Validates that the given string has the correct rut syntax
+# frozen_string_literal: true
 
+# Validates that the given string has the correct rut syntax
 class RutValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if value.nil? || !value.is_a?(String)
