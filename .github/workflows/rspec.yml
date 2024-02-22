@@ -15,8 +15,7 @@ jobs:
           ruby-version: 2.7.4
       - name: Install bundler
         run: |
-          gem install bundler
+          gem install bundler -v 2.4.22
           bundle install --retry=2
       - name: Run rspec
         run: bundle exec rspec
-
