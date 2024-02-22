@@ -24,13 +24,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "activerecord", "~> 6.0"
-  spec.add_development_dependency "activesupport", "~> 6.0"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.6"
-  spec.add_development_dependency "rubocop", "~> 1.0"
-  spec.add_development_dependency "rubocop-performance", "~> 1.11.4"
-  spec.add_development_dependency "rubocop-rails", "~> 2.11.3"
-  spec.add_development_dependency "rubocop-rspec", "~> 2.4.0"
 end
