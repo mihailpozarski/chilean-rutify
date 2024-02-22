@@ -5,7 +5,7 @@ module Chilean
   #
   # Options:
   #
-  # - :rut_format - The rut setter format, can be [:classic, :normalized, :nil], defaults to `:classic`.
+  # - :rut_format - The rut setter format, can be [:classic, :normalized, :dash_only, :nil], defaults to `:classic`.
   module Rutifiable
     # TODO: Make Rspec tests
     extend ActiveSupport::Concern
@@ -20,8 +20,9 @@ module Chilean
 
     # Override rails setter for rut column
     def rut=(value)
-      value = Chilean::Rutify.format_rut(value) if rut_format == :classic
+      value = Chilean::Rutify.classic_rut(value) if rut_format == :classic
       value = Chilean::Rutify.normalize_rut(value) if rut_format == :normalized
+      value = Chilean::Rutify.dash_only_rut(value) if rut_format == :dash_only
       super(value)
     end
   end

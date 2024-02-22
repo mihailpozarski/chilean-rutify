@@ -62,8 +62,16 @@ module Chilean
       rut.upcase
     end
 
+    # returns the rut value with only the dash
+    def dash_only_rut(raw_rut)
+      rut = normalize_rut(raw_rut)
+      return unless rut.present? && valid_rut_values?(rut)
+
+      "#{rut[0..-2]}-#{rut[-1]}"
+    end
+
     # returns the rut value with the chilean format
-    def format_rut(raw_rut)
+    def classic_rut(raw_rut)
       rut = normalize_rut(raw_rut)
       return unless rut.present? && valid_rut_values?(rut)
 
@@ -77,6 +85,21 @@ module Chilean
       end
 
       "#{temp_rut}#{init_rut}-#{verifier}".upcase
+    end
+
+    # returns the rut value with the specified format (default is classic )
+    def format_rut(raw_rut, format = :classic)
+      rut = stringify_rut(raw_rut)
+      return unless rut.present? && valid_rut_values?(rut)
+
+      case format
+      when :normalized
+        normalize_rut(rut)
+      when :dash_only
+        dash_only_rut(rut)
+      when :classic
+        classic_rut(rut)
+      end
     end
 
     # checks if the passed rut is valid
@@ -107,6 +130,6 @@ module Chilean
     end
 
     module_function :normalize_rut, :format_rut, :valid_rut_value?, :get_verifier, :valid_rut?, :valid_rut_verifier?,
-                    :valid_rut_values?, :stringify_rut, :translate_verifier_result
+                    :valid_rut_values?, :stringify_rut, :translate_verifier_result, :dash_only_rut, :classic_rut
   end
 end
