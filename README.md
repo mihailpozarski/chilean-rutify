@@ -30,8 +30,12 @@ You can use the available utility methods directly form the module:
     rut = '36408368-8'
     Chilean::Rutify.normalize_rut(rut)
     # => "364083688"
-    Chilean::Rutify.format_rut(rut)
-    # => ""36.408.368-8"
+    Chilean::Rutify.format_rut(rut) # alias Chilean::Rutify.classic_rut(rut)
+    # => "36.408.368-8"
+    Chilean::Rutify.format_rut(rut, :dash_only) # alias Chilean::Rutify.dash_only_rut(rut)
+    # => "36408368-8"
+    Chilean::Rutify.format_rut(rut, :normalized) # alias Chilean::Rutify.normalize_rut(rut)
+    # => "364083688"
     Chilean::Rutify.valid_rut?(rut)
     # => true
     Chilean::Rutify.valid_rut_verifier?(rut)
@@ -59,7 +63,7 @@ Or include the new Rutifiable concern (it asumes you created a `rut` column):
 ```ruby
 class Person < ActiveRecord::Base
     includes Chilean::Rutifiable
-    self.rut_format = :classic #(optional) options: [:classic, :normalized, :nil] (nil = no override, default: :classic)
+    self.rut_format = :classic #(optional) options: [:classic, :normalized, :dash_only, :nil] (nil = no override, default: :classic)
 end
 ```
 
