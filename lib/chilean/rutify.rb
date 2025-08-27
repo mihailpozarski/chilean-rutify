@@ -9,8 +9,11 @@ module Chilean
   # Chilean rut utils module
   module Rutify
     # checks if the passed value is valid as a rut character
-    def valid_rut_value?(value)
-      ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "k", "K", ".", "-"].include?(value.to_s)
+    def valid_rut_value?(value, allow_k: false)
+      base_values = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
+      base_values.push("K", "k") if allow_k
+
+      base_values.include?(value.to_s)
     end
 
     # returns the rut verifier value
@@ -115,8 +118,8 @@ module Chilean
       rut = stringify_rut(raw_rut)
       return false unless rut.present?
 
-      rut.chars.each do |i|
-        return false unless valid_rut_value?(i)
+      rut.chars.each_with_index do |c, i|
+        return false unless valid_rut_value?(c, allow_k: i == rut.length - 1)
       end
 
       true

@@ -11,14 +11,27 @@ RSpec.describe Chilean::Rutify do
         expect(described_class.valid_rut_value?("y")).to eq false
         expect(described_class.valid_rut_value?("/")).to eq false
         expect(described_class.valid_rut_value?([])).to eq false
+        expect(described_class.valid_rut_value?("k")).to eq false # allow_k is false by default
       end
     end
     context "when given a valid values" do
       it "returns true" do
         expect(described_class.valid_rut_value?(0)).to eq true
         expect(described_class.valid_rut_value?("9")).to eq true
-        expect(described_class.valid_rut_value?("k")).to eq true
-        expect(described_class.valid_rut_value?("K")).to eq true
+      end
+    end
+
+    context "when allow_k is true and evaluate k" do
+      it "returns true" do
+        expect(described_class.valid_rut_value?("k", allow_k: true)).to eq true
+        expect(described_class.valid_rut_value?("K", allow_k: true)).to eq true
+      end
+    end
+
+    context "when allow_k is false and evaluate k" do
+      it "return false" do
+        expect(described_class.valid_rut_value?("k", allow_k: false)).to eq false
+        expect(described_class.valid_rut_value?("K", allow_k: false)).to eq false
       end
     end
   end
@@ -65,6 +78,7 @@ RSpec.describe Chilean::Rutify do
       it "returns false" do
         expect(described_class.valid_rut_verifier?("14.001.723-8")).to eq false
         expect(described_class.valid_rut_verifier?("14.175.644-4")).to eq false
+        expect(described_class.valid_rut_verifier?("14410191K-1")).to eq false
       end
     end
   end
@@ -129,6 +143,7 @@ RSpec.describe Chilean::Rutify do
       it "returns false" do
         expect(described_class.valid_rut?("14.001.723-8")).to eq false
         expect(described_class.valid_rut?("14.175.644-4")).to eq false
+        expect(described_class.valid_rut?("14410191K-1")).to eq false
       end
     end
   end
