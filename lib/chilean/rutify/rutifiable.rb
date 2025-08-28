@@ -23,7 +23,7 @@ module Chilean
       value = Chilean::Rutify.classic_rut(value) if rut_format == :classic
       value = Chilean::Rutify.normalize_rut(value) if rut_format == :normalized
       value = Chilean::Rutify.dash_only_rut(value) if rut_format == :dash_only
-      super(value)
+      super
     end
   end
 end
