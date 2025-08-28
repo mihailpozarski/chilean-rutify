@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "activerecord", "~> 6.0"
-gem "activesupport", "~> 6.0"
+gem "activerecord", "~> 7.0"
+gem "activesupport", "~> 7.0"
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.6"
 gem "rubocop", "~> 1.0"
